@@ -8,15 +8,15 @@ public class Main {
         int opcion;
         do {
             System.out.println("\n--- Menú ---");
-            System.out.println("1. Construir o inicializar el ÁRBOL BINARIO");
-            System.out.println("2. Insertar elementos al ÁRBOL BINARIO");
-            System.out.println("3. Eliminar un elemento del ÁRBOL BINARIO");
-            System.out.println("4. Consultar el ÁRBOL BINARIO");
-            System.out.println("5. Determinar el número de elementos del ÁRBOL BINARIO");
-            System.out.println("6. Determinar si el ÁRBOL BINARIO es vacío");
-            System.out.println("7. Recorrido en PREORDEN del ÁRBOL BINARIO");
-            System.out.println("8. Recorrido en ORDEN del ÁRBOL BINARIO");
-            System.out.println("9. Recorrido en POSTORDEN del ÁRBOL BINARIO");
+            System.out.println("1. Construir o inicializar el ARBOL BINARIO");
+            System.out.println("2. Insertar elementos al ARBOL BINARIO");
+            System.out.println("3. Eliminar un elemento del ARBOL BINARIO");
+            System.out.println("4. Consultar el ARBOL BINARIO");
+            System.out.println("5. Determinar el número de elementos del ARBOL BINARIO");
+            System.out.println("6. Determinar si el ARBOL BINARIO es vacío");
+            System.out.println("7. Recorrido en PREORDEN del ARBOL BINARIO");
+            System.out.println("8. Recorrido en ORDEN del ARBOL BINARIO");
+            System.out.println("9. Recorrido en POSTORDEN del ARBOL BINARIO");
             System.out.println("0. Salir");
             System.out.print("Ingrese su opción: ");
 
@@ -25,7 +25,7 @@ public class Main {
                 switch (opcion) {
                     case 1:
                         arbol = new ArbolBinario();
-                        System.out.println("ÁRBOL BINARIO inicializado.");
+                        System.out.println("ARBOL BINARIO inicializado.");
                         break;
                     case 2:
                         if (arbol == null) {
@@ -62,7 +62,7 @@ public class Main {
                             System.out.println("Error: El árbol no ha sido inicializado.");
                             break;
                         }
-                        System.out.println("ÁRBOL BINARIO:");
+                        System.out.println("ARBOL BINARIO:");
                         arbol.visualizar();
                         break;
                     case 5:

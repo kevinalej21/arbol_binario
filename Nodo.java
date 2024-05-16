@@ -1,4 +1,4 @@
-public class Nodo {
+class Nodo {
     int valor;
     Nodo izquierdo, derecho;
 

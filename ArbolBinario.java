@@ -1,37 +1,37 @@
-public class ArbolBinario {
-    Nodo raiz;
+public class ArbolBinario<T extends Comparable<T>> {
+    NodoArbol<T> raiz;
 
     public ArbolBinario() {
         this.raiz = null;
     }
 
-    public void insertar(int dato) {
+    public void insertar(T dato) {
         raiz = insertarRec(raiz, dato);
     }
 
-    private Nodo insertarRec(Nodo nodo, int dato) {
+    private NodoArbol<T> insertarRec(NodoArbol<T> nodo, T dato) {
         if (nodo == null) {
-            return new Nodo(dato);
+            return new NodoArbol<>(dato);
         }
-        if (dato < nodo.valor) {
+        if (dato.compareTo(nodo.dato) < 0) {
             nodo.izquierdo = insertarRec(nodo.izquierdo, dato);
-        } else if (dato > nodo.valor) {
+        } else if (dato.compareTo(nodo.dato) > 0) {
             nodo.derecho = insertarRec(nodo.derecho, dato);
         }
         return nodo;
     }
 
-    public void eliminar(int dato) {
+    public void eliminar(T dato) {
         raiz = eliminarRec(raiz, dato);
     }
 
-    private Nodo eliminarRec(Nodo nodo, int dato) {
+    private NodoArbol<T> eliminarRec(NodoArbol<T> nodo, T dato) {
         if (nodo == null) {
             return nodo;
         }
-        if (dato < nodo.valor) {
+        if (dato.compareTo(nodo.dato) < 0) {
             nodo.izquierdo = eliminarRec(nodo.izquierdo, dato);
-        } else if (dato > nodo.valor) {
+        } else if (dato.compareTo(nodo.dato) > 0) {
             nodo.derecho = eliminarRec(nodo.derecho, dato);
         } else {
             if (nodo.izquierdo == null) {
@@ -39,16 +39,16 @@ public class ArbolBinario {
             } else if (nodo.derecho == null) {
                 return nodo.izquierdo;
             }
-            nodo.valor = encontrarMin(nodo.derecho);
-            nodo.derecho = eliminarRec(nodo.derecho, nodo.valor);
+            nodo.dato = encontrarMin(nodo.derecho);
+            nodo.derecho = eliminarRec(nodo.derecho, nodo.dato);
         }
         return nodo;
     }
 
-    private int encontrarMin(Nodo nodo) {
-        int min = nodo.valor;
+    private T encontrarMin(NodoArbol<T> nodo) {
+        T min = nodo.dato;
         while (nodo.izquierdo != null) {
-            min = nodo.izquierdo.valor;
+            min = nodo.izquierdo.dato;
             nodo = nodo.izquierdo;
         }
         return min;
@@ -59,9 +59,9 @@ public class ArbolBinario {
         System.out.println();
     }
 
-    private void preOrdenRec(Nodo nodo) {
+    private void preOrdenRec(NodoArbol<T> nodo) {
         if (nodo != null) {
-            System.out.print(nodo.valor + " ");
+            System.out.print(nodo.dato + " ");
             preOrdenRec(nodo.izquierdo);
             preOrdenRec(nodo.derecho);
         }
@@ -72,10 +72,10 @@ public class ArbolBinario {
         System.out.println();
     }
 
-    private void enOrdenRec(Nodo nodo) {
+    private void enOrdenRec(NodoArbol<T> nodo) {
         if (nodo != null) {
             enOrdenRec(nodo.izquierdo);
-            System.out.print(nodo.valor + " ");
+            System.out.print(nodo.dato + " ");
             enOrdenRec(nodo.derecho);
         }
     }
@@ -85,11 +85,11 @@ public class ArbolBinario {
         System.out.println();
     }
 
-    private void postOrdenRec(Nodo nodo) {
+    private void postOrdenRec(NodoArbol<T> nodo) {
         if (nodo != null) {
             postOrdenRec(nodo.izquierdo);
             postOrdenRec(nodo.derecho);
-            System.out.print(nodo.valor + " ");
+            System.out.print(nodo.dato + " ");
         }
     }
 
@@ -97,13 +97,13 @@ public class ArbolBinario {
         visualizarRec(raiz, 0);
     }
 
-    private void visualizarRec(Nodo nodo, int nivel) {
+    private void visualizarRec(NodoArbol<T> nodo, int nivel) {
         if (nodo != null) {
             visualizarRec(nodo.derecho, nivel + 1);
             for (int i = 0; i < nivel; i++) {
                 System.out.print("   ");
             }
-            System.out.println(nodo.valor);
+            System.out.println(nodo.dato);
             visualizarRec(nodo.izquierdo, nivel + 1);
         }
     }
@@ -116,10 +116,22 @@ public class ArbolBinario {
         return numeroElementosRec(raiz);
     }
 
-    private int numeroElementosRec(Nodo nodo) {
+    private int numeroElementosRec(NodoArbol<T> nodo) {
         if (nodo == null) {
             return 0;
         }
         return 1 + numeroElementosRec(nodo.izquierdo) + numeroElementosRec(nodo.derecho);
+    }
+
+    private static class NodoArbol<T> {
+        T dato;
+        NodoArbol<T> izquierdo;
+        NodoArbol<T> derecho;
+
+        NodoArbol(T dato) {
+            this.dato = dato;
+            this.izquierdo = null;
+            this.derecho = null;
+        }
     }
 }
