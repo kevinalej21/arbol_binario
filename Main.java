@@ -50,7 +50,7 @@ public class Main {
                         System.out.print("Ingrese el valor a eliminar del árbol (entero): ");
                         if (scanner.hasNextInt()) {
                             int elementoEliminar = scanner.nextInt();
-                            arbol.borrar(elementoEliminar); // Corregido aquí
+                            arbol.eliminar(elementoEliminar);
                             System.out.println("Elemento eliminado correctamente del árbol.");
                         } else {
                             System.out.println("Error: Ingrese un valor entero.");

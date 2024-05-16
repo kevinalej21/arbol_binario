@@ -1,37 +1,37 @@
-public class ArbolBinario<T extends Comparable<T>> {
-    NodoArbol<T> raiz;
+public class ArbolBinario {
+    Nodo raiz;
 
     public ArbolBinario() {
         this.raiz = null;
     }
 
-    public void insertar(T dato) {
+    public void insertar(int dato) {
         raiz = insertarRec(raiz, dato);
     }
 
-    private NodoArbol<T> insertarRec(NodoArbol<T> nodo, T dato) {
+    private Nodo insertarRec(Nodo nodo, int dato) {
         if (nodo == null) {
-            return new NodoArbol<>(dato);
+            return new Nodo(dato);
         }
-        if (dato.compareTo(nodo.dato) < 0) {
+        if (dato < nodo.valor) {
             nodo.izquierdo = insertarRec(nodo.izquierdo, dato);
-        } else if (dato.compareTo(nodo.dato) > 0) {
+        } else if (dato > nodo.valor) {
             nodo.derecho = insertarRec(nodo.derecho, dato);
         }
         return nodo;
     }
 
-    public void eliminar(T dato) {
+    public void eliminar(int dato) {
         raiz = eliminarRec(raiz, dato);
     }
 
-    private NodoArbol<T> eliminarRec(NodoArbol<T> nodo, T dato) {
+    private Nodo eliminarRec(Nodo nodo, int dato) {
         if (nodo == null) {
             return nodo;
         }
-        if (dato.compareTo(nodo.dato) < 0) {
+        if (dato < nodo.valor) {
             nodo.izquierdo = eliminarRec(nodo.izquierdo, dato);
-        } else if (dato.compareTo(nodo.dato) > 0) {
+        } else if (dato > nodo.valor) {
             nodo.derecho = eliminarRec(nodo.derecho, dato);
         } else {
             if (nodo.izquierdo == null) {
@@ -39,16 +39,16 @@ public class ArbolBinario<T extends Comparable<T>> {
             } else if (nodo.derecho == null) {
                 return nodo.izquierdo;
             }
-            nodo.dato = encontrarMin(nodo.derecho);
-            nodo.derecho = eliminarRec(nodo.derecho, nodo.dato);
+            nodo.valor = encontrarMin(nodo.derecho);
+            nodo.derecho = eliminarRec(nodo.derecho, nodo.valor);
         }
         return nodo;
     }
 
-    private T encontrarMin(NodoArbol<T> nodo) {
-        T min = nodo.dato;
+    private int encontrarMin(Nodo nodo) {
+        int min = nodo.valor;
         while (nodo.izquierdo != null) {
-            min = nodo.izquierdo.dato;
+            min = nodo.izquierdo.valor;
             nodo = nodo.izquierdo;
         }
         return min;
@@ -59,9 +59,9 @@ public class ArbolBinario<T extends Comparable<T>> {
         System.out.println();
     }
 
-    private void preOrdenRec(NodoArbol<T> nodo) {
+    private void preOrdenRec(Nodo nodo) {
         if (nodo != null) {
-            System.out.print(nodo.dato + " ");
+            System.out.print(nodo.valor + " ");
             preOrdenRec(nodo.izquierdo);
             preOrdenRec(nodo.derecho);
         }
@@ -72,10 +72,10 @@ public class ArbolBinario<T extends Comparable<T>> {
         System.out.println();
     }
 
-    private void enOrdenRec(NodoArbol<T> nodo) {
+    private void enOrdenRec(Nodo nodo) {
         if (nodo != null) {
             enOrdenRec(nodo.izquierdo);
-            System.out.print(nodo.dato + " ");
+            System.out.print(nodo.valor + " ");
             enOrdenRec(nodo.derecho);
         }
     }
@@ -85,11 +85,11 @@ public class ArbolBinario<T extends Comparable<T>> {
         System.out.println();
     }
 
-    private void postOrdenRec(NodoArbol<T> nodo) {
+    private void postOrdenRec(Nodo nodo) {
         if (nodo != null) {
             postOrdenRec(nodo.izquierdo);
             postOrdenRec(nodo.derecho);
-            System.out.print(nodo.dato + " ");
+            System.out.print(nodo.valor + " ");
         }
     }
 
@@ -97,13 +97,13 @@ public class ArbolBinario<T extends Comparable<T>> {
         visualizarRec(raiz, 0);
     }
 
-    private void visualizarRec(NodoArbol<T> nodo, int nivel) {
+    private void visualizarRec(Nodo nodo, int nivel) {
         if (nodo != null) {
             visualizarRec(nodo.derecho, nivel + 1);
             for (int i = 0; i < nivel; i++) {
                 System.out.print("   ");
             }
-            System.out.println(nodo.dato);
+            System.out.println(nodo.valor);
             visualizarRec(nodo.izquierdo, nivel + 1);
         }
     }
@@ -116,22 +116,10 @@ public class ArbolBinario<T extends Comparable<T>> {
         return numeroElementosRec(raiz);
     }
 
-    private int numeroElementosRec(NodoArbol<T> nodo) {
+    private int numeroElementosRec(Nodo nodo) {
         if (nodo == null) {
             return 0;
         }
         return 1 + numeroElementosRec(nodo.izquierdo) + numeroElementosRec(nodo.derecho);
-    }
-
-    private static class NodoArbol<T> {
-        T dato;
-        NodoArbol<T> izquierdo;
-        NodoArbol<T> derecho;
-
-        NodoArbol(T dato) {
-            this.dato = dato;
-            this.izquierdo = null;
-            this.derecho = null;
-        }
     }
 }
