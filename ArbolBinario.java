@@ -1,4 +1,4 @@
-public class ArbolBinario<T extends Comparable<T>> {
+class ArbolBinario<T extends Comparable<T>> {
     NodoArbol<T> raiz;
 
     public ArbolBinario() {
@@ -101,7 +101,7 @@ public class ArbolBinario<T extends Comparable<T>> {
         if (nodo != null) {
             visualizarRec(nodo.derecho, nivel + 1);
             for (int i = 0; i < nivel; i++) {
-                System.out.print("   ");
+                System.out.print("  ");
             }
             System.out.println(nodo.dato);
             visualizarRec(nodo.izquierdo, nivel + 1);
@@ -121,6 +121,23 @@ public class ArbolBinario<T extends Comparable<T>> {
             return 0;
         }
         return 1 + numeroElementosRec(nodo.izquierdo) + numeroElementosRec(nodo.derecho);
+    }
+
+    public int profundidad() {
+        return profundidadRec(raiz);
+    }
+
+    private int profundidadRec(NodoArbol<T> nodo) {
+        if (nodo == null) {
+            return 0;
+        }
+        int profundidadIzquierda = profundidadRec(nodo.izquierdo);
+        int profundidadDerecha = profundidadRec(nodo.derecho);
+        return 1 + Math.max(profundidadIzquierda, profundidadDerecha);
+    }
+
+    public void borrarArbol() {
+        raiz = null;
     }
 
     private static class NodoArbol<T> {

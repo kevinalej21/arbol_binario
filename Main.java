@@ -3,20 +3,22 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ArbolBinario arbol = null;
+        ArbolBinario<Integer> arbol = null;
 
         int opcion;
         do {
             System.out.println("\n--- Menú ---");
-            System.out.println("1. Construir o inicializar el ARBOL BINARIO");
-            System.out.println("2. Insertar elementos al ARBOL BINARIO");
-            System.out.println("3. Eliminar un elemento del ARBOL BINARIO");
-            System.out.println("4. Consultar el ARBOL BINARIO");
-            System.out.println("5. Determinar el número de elementos del ARBOL BINARIO");
-            System.out.println("6. Determinar si el ARBOL BINARIO es vacío");
-            System.out.println("7. Recorrido en PREORDEN del ARBOL BINARIO");
-            System.out.println("8. Recorrido en ORDEN del ARBOL BINARIO");
-            System.out.println("9. Recorrido en POSTORDEN del ARBOL BINARIO");
+            System.out.println("1. Construir o inicializar el ÁRBOL BINARIO");
+            System.out.println("2. Insertar elementos al ÁRBOL BINARIO");
+            System.out.println("3. Eliminar un elemento del ÁRBOL BINARIO");
+            System.out.println("4. Consultar el ÁRBOL BINARIO");
+            System.out.println("5. Determinar el número de elementos del ÁRBOL BINARIO");
+            System.out.println("6. Determinar si el ÁRBOL BINARIO es vacío");
+            System.out.println("7. Recorrido en PREORDEN del ÁRBOL BINARIO");
+            System.out.println("8. Recorrido en ORDEN del ÁRBOL BINARIO");
+            System.out.println("9. Recorrido en POSTORDEN del ÁRBOL BINARIO");
+            System.out.println("10. Calcular la profundidad del ÁRBOL BINARIO");
+            System.out.println("11. Borrar el ÁRBOL BINARIO y todos sus nodos");
             System.out.println("0. Salir");
             System.out.print("Ingrese su opción: ");
 
@@ -24,8 +26,8 @@ public class Main {
                 opcion = scanner.nextInt();
                 switch (opcion) {
                     case 1:
-                        arbol = new ArbolBinario();
-                        System.out.println("ARBOL BINARIO inicializado.");
+                        arbol = new ArbolBinario<>();
+                        System.out.println("ÁRBOL BINARIO inicializado.");
                         break;
                     case 2:
                         if (arbol == null) {
@@ -62,7 +64,7 @@ public class Main {
                             System.out.println("Error: El árbol no ha sido inicializado.");
                             break;
                         }
-                        System.out.println("ARBOL BINARIO:");
+                        System.out.println("ÁRBOL BINARIO:");
                         arbol.visualizar();
                         break;
                     case 5:
@@ -102,6 +104,21 @@ public class Main {
                         }
                         System.out.println("Recorrido en POSTORDEN del árbol:");
                         arbol.postOrden();
+                        break;
+                    case 10:
+                        if (arbol == null) {
+                            System.out.println("Error: El árbol no ha sido inicializado.");
+                            break;
+                        }
+                        System.out.println("Profundidad del árbol: " + arbol.profundidad());
+                        break;
+                    case 11:
+                        if (arbol == null) {
+                            System.out.println("Error: El árbol no ha sido inicializado.");
+                            break;
+                        }
+                        arbol.borrarArbol();
+                        System.out.println("ÁRBOL BINARIO y todos sus nodos han sido borrados.");
                         break;
                     case 0:
                         System.out.println("Saliendo del programa...");
